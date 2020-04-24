@@ -1,0 +1,122 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Add Product {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title">
+            Add Product
+          </h4>
+        </div>
+        <div class="card-body">
+
+          <h6 class="card-category">
+              {% if msg %}
+                <span class="text-danger">{{ msg }}</span>
+              {% else %}
+                Add your credentials for new product 
+              {% endif %}  
+          </h6>
+          
+          <br />
+
+          {% if success %}
+
+            <p class="">
+              Please <a href={% url 'login' %} class="text-black text-small">authenticate</a> using the new account.
+            </p>  
+
+          {% else %}
+            <form role="form" method="post" action="">
+                
+              {% csrf_token %} 
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Product Id</label>
+                    {{ form.username }}
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Product Name *</label>
+                    {{ form.username }}
+                  </div>
+                </div>
+              </div>
+              
+              <span class="text-danger">{{ form.username.errors }}</span>
+
+              <br />
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Product Description *</label>
+                    {{ form.email }}
+                  </div>
+                </div>
+              </div>
+              <span class="text-danger">{{ form.email.errors }}</span>
+
+              <br />
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Price</label>
+                    {{ form.password1 }}
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Category</label>
+                    {{ form.password1 }}
+                  </div>
+                </div>
+              </div>
+              <span class="text-danger">{{ form.password1.errors }}</span>
+
+              <br />
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Product Picture</label>
+                    {{ form.password2 }}
+                  </div>
+                </div>
+              </div>
+              <span class="text-danger">{{ form.password2.errors }}</span>
+
+              <br />
+
+              <button type="submit" name="register" class="btn btn-primary pull-left">Add Product</button>
+
+              &nbsp; &nbsp; 
+              <span class="pull-right">
+                Have an account? <a href="{% url 'login' %}" class="text-primary">Login</a>
+              </span>
+
+              <div class="clearfix"></div>
+
+            </form>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

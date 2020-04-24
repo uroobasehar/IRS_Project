@@ -1,0 +1,190 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Products {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+{% if type == "grid" %}
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card"> 
+                <div class="card-header card-header-primary">
+                <div class="row">
+                <div class="col-md-6">
+                  <h4 class="card-title ">Products</h4>
+                  
+                  <p class="card-category"> Here is a subtitle for this table</p>
+                 
+                </div>
+                <div class="col-md-6">
+                <a class="card-title" style="float: right;" href="/addProduct">
+                  <i class="material-icons">add</i> 
+                  Add New 
+                </a>
+              </div>
+              </div>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class=" text-primary">
+                        <th>
+                          ID
+                        </th>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                       
+                        <th>
+                          Price
+                        </th>
+                      </thead>
+                      <tbody>
+                        {% for product in products %}
+                        <tr>
+                          <td>
+                            {{product.id}}
+                          </td>
+                          <td>
+                            {{product.name}}
+                          </td>
+                          <td>
+                            {{product.description}}
+                          </td>
+                          
+                          <td class="text-primary">
+                            {{product.price}}
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+         
+        </div>
+        {% endif %}
+        {% if type == "add" %}
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header card-header-primary">
+                <h4 class="card-title">
+                  Add Product
+                </h4>
+              </div>
+              <div class="card-body">
+      
+                <h6 class="card-category">
+                    {% if msg %}
+                      <span class="text-danger">{{ msg }}</span>
+                    {% else %}
+                      Add your credentials for new product 
+                    {% endif %}  
+                </h6>
+                
+                <br />
+      
+                {% if success %}
+      
+                  <p class="">
+                    Please <a href={% url 'login' %} class="text-black text-small">authenticate</a> using the new account.
+                  </p>  
+      
+                {% else %}
+                  <form role="form" method="post" action="">
+                      
+                    {% csrf_token %} 
+      
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Product Id</label>
+                          <input type="number" class="form-control" name="id" placeholder="{{ form.id }}
+
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Product Name *</label>
+                          <input type="text" class="form-control" name="name">
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <span class="text-danger">{{ form.username.errors }}</span>
+      
+                    <br />
+      
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Product Description *</label>
+                          <input type="text" class="form-control" name="description">
+                        </div>
+                      </div>
+                    </div>
+                    <span class="text-danger">{{ form.email.errors }}</span>
+      
+                    <br />
+      
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Price</label>
+                          <input type="text" class="form-control" name="price">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Category</label>
+                          <input type="text" class="form-control" name="category">
+                        </div>
+                      </div>
+                    </div>
+                    <span class="text-danger">{{ form.password1.errors }}</span>
+      
+                    <br />
+      
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Product Picture</label>
+                          {{ form.password2 }}
+                        </div>
+                      </div>
+                    </div>
+                    <span class="text-danger">{{ form.password2.errors }}</span>
+      
+                    <br />
+      
+                    <button type="submit" name="register" class="btn btn-primary pull-left">Add Product</button>
+      
+                    &nbsp; &nbsp; 
+                    <span class="pull-right">
+                      Have an account? <a href="{% url 'login' %}" class="text-primary">Login</a>
+                    </span>
+      
+                    <div class="clearfix"></div>
+      
+                  </form>
+                {% endif %}
+      
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -15,4 +15,7 @@ urlpatterns = [
 
     # The home page
     path('', views.index, name='home'),
+    path('products', views.products, name='products'),
+    path('addProduct', views.addProduct, name='addProduct'),
+
 ]
